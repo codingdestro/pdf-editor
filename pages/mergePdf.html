@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Editor | Extract Pages</title>
+    <link rel="stylesheet" href="../styles/common.css" />
+    <link rel="stylesheet" href="../styles/extract_style.css" />
+  </head>
+  <body>
+    <form action="/mergePdf" method="post" enctype="multipart/form-data">
+      <p class="warn">file should be pdf!</p>
+      <section class="container">
+        <label for="file-input">
+          <p id="filename">select file 1</p>
+        </label>
+        <input type="file" name="pdf1" id="file-input" style="display: none" />
+      </section>
+      <section class="container">
+        <label for="file-input2">
+          <p id="filename">select file 2</p>
+        </label>
+        <input type="file" name="pdf2" id="file-input2" style="display: none" />
+      </section>
+
+      <button
+        style="background: rgb(0, 102, 255); color: white; border: none"
+        type="submit"
+      >
+        merge pdfs
+      </button>
+    </form>
+  </body>
+
+  <script>
+    let fileBox2 = document.querySelector("#file-input2");
+    let fileBox = document.querySelector("#file-input");
+    let pageNo = document.querySelector("#page-no");
+    let filename = document.querySelectorAll("#filename");
+    fileBox.addEventListener("change", (e) => {
+      let file = e.target.files[0];
+      filename[0].innerText = file.name;
+    });
+    fileBox2.addEventListener("change", (e) => {
+      let file = e.target.files[0];
+      filename[1].innerText = file.name;
+    });
+  </script>
+</html>

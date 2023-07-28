@@ -3,6 +3,18 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  box-sizing: border-box;
+}
+
+.container label {
+  border: 1px solid #000;
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 0.2rem;
+  box-sizing: border-box;
+  padding: 0rem 0.5rem;
+  text-align: center;
+  cursor: pointer;
 }
 
 input[type="number"],
@@ -38,4 +50,15 @@ button:active {
   border-radius: 0.5rem;
   background-color: #aaa;
   text-align: center;
+}
+
+.warn {
+  font-size: 14px;
+  font-style: italic;
+  color: #000a;
+}
+form {
+  box-shadow: 2px 2px 5px #000;
+  padding: 1rem;
+  border-radius: 1rem;
 }
