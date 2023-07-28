@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+input[type="number"],
+button {
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  outline: none;
+  border: 1px solid #000;
+}
+button {
+  cursor: pointer;
+  scale: 1;
+  transition: 0.2s;
+}
+
+button:active {
+  scale: 0.95;
+}
+
+#pages {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  gap: 10px;
+  max-width: 310px;
+}
+
+#pages > li {
+  /* flex: 1; */
+  list-style: none;
+  border: 1px solid #000;
+  padding: 5px;
+  border-radius: 0.5rem;
+  background-color: #aaa;
+  text-align: center;
+}

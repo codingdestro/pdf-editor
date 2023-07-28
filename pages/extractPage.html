@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Editor | Extract Pages</title>
+    <link rel="stylesheet" href="../styles/common.css" />
+    <link rel="stylesheet" href="../styles/extract_style.css" />
+  </head>
+  <body>
+    <form action="" method="get" enctype="multipart/form-data">
+      <section class="container">
+        <label for="file-input">select file</label>
+        <input type="file" name="pdf" id="file-input" style="display: none" />
+        <p id="filename">file name</p>
+      </section>
+      <input type="text" value="" id="pages-val" name="pages" />
+      <section>
+        <input type="number" name="" placeholder="add page no" id="page-no" />
+        <button id="add-btn" type="button">add page no</button>
+        <ul id="pages"></ul>
+      </section>
+      <button style="background-color: #fc345c; color: white; float: right">
+        extract pages
+      </button>
+    </form>
+  </body>
+
+  <script>
+    let fileBox = document.querySelector("#file-input");
+    let pageNo = document.querySelector("#page-no");
+    let filename = document.querySelector("#filename");
+    let pages = document.querySelector("#pages");
+    let addButton = document.querySelector("#add-btn");
+    let pagesArr = [];
+
+    fileBox.addEventListener("change", (e) => {
+      let file = e.target.files[0];
+      filename.innerText = file.name;
+    });
+
+    addButton.addEventListener("click", () => {
+      let val = pageNo.value;
+      if (!val) return;
+      pageNo.value = "";
+      pagesArr.push(parseInt(val));
+      let li = document.createElement("li");
+      li.classList.add("list");
+      li.innerText = val;
+      pages.append(li);
+      document.querySelector("#pages-val").value = pagesArr;
+    });
+  </script>
+</html>
