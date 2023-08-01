@@ -29,7 +29,7 @@ app.post("/removePages", getFileBuffer, async (req, res) => {
 });
 
 app.post("/mergePdf", getFileBuffer, async (req, res) => {
-  let buffers = req.buffers;
+  let buffers = req.data.files;
 
   for (let x in buffers) {
     buffers[x] = Buffer.concat(buffers[x]);

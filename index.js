@@ -13,6 +13,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(routes);
 
+
+app.get('/',(req,res)=>{
+  res.status(200).end('this is a text message')
+})
+
 server.listen(8080, () => {
   console.log("server is running...");
 });
