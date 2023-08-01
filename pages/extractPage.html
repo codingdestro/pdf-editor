@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="../styles/extract_style.css" />
   </head>
   <body>
-    <form action="/pdf" method="post" enctype="multipart/form-data">
+    <div class="box">
       <p class="warn">file should be pdf!</p>
-      <section class="container">
+      <section class="file_box">
         <label for="file-input">
           <p id="filename">select file</p>
         </label>
@@ -23,43 +23,26 @@
         name="pages"
         style="display: none"
       />
-      <section>
+      <section class="page_box">
         <input type="number" name="" placeholder="add page no" id="page-no" />
         <button id="add-btn" type="button">add page no</button>
-        <ul id="pages"></ul>
       </section>
-      <button
-        style="background: rgb(0, 102, 255); color: white; border: none"
-        type="submit"
-      >
-        extract page
-      </button>
-    </form>
+
+      <div class="or">or</div>
+      <section class="rangeInput">
+        <span>from</span>
+        <input type="number" value="1" id="from" />
+        <span>to</span>
+        <input type="number" value="2" id="to" />
+        <button type="button" id="fromRange">add pages</button>
+      </section>
+      <section id="pages"></section>
+
+      <section class="button_box">
+        <button id="extract-page">extract Page</button>
+        <button id="remove-page">remove Page</button>
+      </section>
+    </div>
   </body>
-
-  <script>
-    let fileBox = document.querySelector("#file-input");
-    let pageNo = document.querySelector("#page-no");
-    let filename = document.querySelector("#filename");
-    let pages = document.querySelector("#pages");
-    let addButton = document.querySelector("#add-btn");
-    let pagesArr = [];
-
-    fileBox.addEventListener("change", (e) => {
-      let file = e.target.files[0];
-      filename.innerText = file.name;
-    });
-
-    addButton.addEventListener("click", () => {
-      let val = pageNo.value;
-      if (!val) return;
-      pageNo.value = "";
-      pagesArr.push(parseInt(val));
-      let li = document.createElement("li");
-      li.classList.add("list");
-      li.innerText = val;
-      pages.append(li);
-      document.querySelector("#pages-val").value = pagesArr;
-    });
-  </script>
+  <script src="../main.js"></script>
 </html>

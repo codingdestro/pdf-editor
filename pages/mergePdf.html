@@ -8,42 +8,87 @@
     <link rel="stylesheet" href="../styles/extract_style.css" />
   </head>
   <body>
-    <form action="/mergePdf" method="post" enctype="multipart/form-data">
+    <div class="box">
       <p class="warn">file should be pdf!</p>
-      <section class="container">
+      <section class="file_box">
         <label for="file-input">
           <p id="filename">select file 1</p>
         </label>
-        <input type="file" name="pdf1" id="file-input" style="display: none" />
+        <input
+          type="file"
+          required
+          name="pdf1"
+          id="file-input"
+          style="display: none"
+        />
       </section>
-      <section class="container">
+      <section class="file_box">
         <label for="file-input2">
           <p id="filename">select file 2</p>
         </label>
-        <input type="file" name="pdf2" id="file-input2" style="display: none" />
+        <input
+          type="file"
+          required
+          name="pdf2"
+          id="file-input2"
+          style="display: none"
+        />
       </section>
 
       <button
         style="background: rgb(0, 102, 255); color: white; border: none"
-        type="submit"
+        id="button"
       >
         merge pdfs
       </button>
-    </form>
+    </div>
   </body>
 
   <script>
     let fileBox2 = document.querySelector("#file-input2");
     let fileBox = document.querySelector("#file-input");
-    let pageNo = document.querySelector("#page-no");
     let filename = document.querySelectorAll("#filename");
+    let file1 = null;
+    let file2 = null;
+
+    //getting file 1
     fileBox.addEventListener("change", (e) => {
       let file = e.target.files[0];
       filename[0].innerText = file.name;
+      if (file.type !== "application/pdf") alert("please select pdf file");
+      file1 = file;
     });
+
+    //getting file 2
     fileBox2.addEventListener("change", (e) => {
       let file = e.target.files[0];
       filename[1].innerText = file.name;
+      if (file.type !== "application/pdf") alert("please select pdf file");
+      file2 = file;
+    });
+
+    document.querySelector("#button").addEventListener("click", () => {
+      if (!file1 || !file2) {
+        alert("please select files.");
+        return;
+      }
+      let form = new FormData();
+      form.append("pdf1", file1);
+      form.append("pdf2", file2);
+
+      fetch("http://localhost:8080/mergePdf", {
+        method: "POST",
+        body: form,
+      })
+        .then((data) => data.blob())
+        .then((blob) => {
+          let a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "merged.pdf";
+          document.body.append(a);
+          a.click();
+          a.remove();
+        });
     });
   </script>
 </html>
