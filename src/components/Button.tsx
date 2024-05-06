@@ -1,21 +1,18 @@
-import { Link } from "react-router-dom";
-
 interface Props {
-  path: string;
   children: string;
+  onClickHandler?: () => void;
+  disable: boolean;
 }
-
-const Button = ({ path, children }: Props) => {
+const Button = ({ children, onClickHandler, disable }: Props) => {
   return (
     <div>
-      <div
-        className="px-5 m-2 min-w-44 text-center py-3 bg-blue-400 text-white rounded-lg 
-        hover:bg-blue-500 transition-colors cursor-pointer shadow-md
-
-        "
+      <button
+        onClick={!disable ? onClickHandler : () => { }}
+        className={`py-2 px-5 bg-violet-300 rounded-lg shadow-lg font-semibold ${disable && "opacity-50"}
+        `}
       >
-        <Link to={path}>{children}</Link>
-      </div>
+        {children}
+      </button>
     </div>
   );
 };

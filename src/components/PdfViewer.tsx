@@ -6,12 +6,23 @@ interface Props {
   url: string;
 }
 
-function GetPdfPage({ page }: { page: PDFPageProxy }) {
+function GetPdfPage({
+  page,
+  idx,
+  onClickHandler,
+}: {
+  page: PDFPageProxy;
+  idx: number;
+  onClickHandler: Function;
+}) {
   const canvaRef = useRef<HTMLCanvasElement>(null);
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState(true);
+  const [selected, setSelected] = useState(false);
 
-  const toggleSelected = () => setSelected((prev: boolean) => !prev);
+  const toggleSelected = () => {
+    onClickHandler(idx);
+    setSelected((prev: boolean) => !prev);
+  };
 
   useEffect(() => {
     const renderer = async () => {
@@ -40,11 +51,18 @@ function GetPdfPage({ page }: { page: PDFPageProxy }) {
 
   return (
     <div
-      className={`${selected ? "border border-red-400 border-2xl rounded-lg overflow-hidden" : ""}`}
+      className={`relative flex-col flex items-center cursor-pointer`}
       onClick={toggleSelected}
     >
       {loading && <div>loading</div>}
-      <canvas ref={canvaRef}></canvas>
+      <div className="shadow-lg border p-1 bg-white rounded-lg ">
+        <canvas ref={canvaRef} />
+      </div>
+      <div
+        className={`${selected ? "bg-green-400" : "bg-slate-200"} w-14 h-14 flex items-center justify-center scale-50 self-center p-2 rounded-full`}
+      >
+        {idx}
+      </div>
     </div>
   );
 }
@@ -55,6 +73,15 @@ function PdfViewer({ url }: Props) {
 
   const [pages, setPages] = useState<PDFPageProxy[]>([]);
   const [loading, setLoading] = useState(false);
+  const [selectedPages, setSelectedPages] = useState<number[]>([]);
+
+  const selectPage = (pageNo: number) => {
+    setSelectedPages((prev: number[]) => [...prev, pageNo]);
+  };
+
+  useEffect(() => {
+    console.log(selectedPages);
+  }, [selectedPages]);
 
   useEffect(() => {
     const renderer = async () => {
@@ -80,12 +107,19 @@ function PdfViewer({ url }: Props) {
 
   return (
     <div>
-      <div className="flex gap-5 p-4 flex-wrap">
+      <div className="flex gap-5 p-4 flex-wrap justify-center">
         {loading && <div>Please wait ...</div>}
         {pages.length > 0 &&
           pages.map((page: any, idx: number) => (
-            <div key={idx}>
-              <GetPdfPage page={page} />
+            <div
+              key={idx}
+              className="flex items-center justify-center flex-col"
+            >
+              <GetPdfPage
+                page={page}
+                idx={idx + 1}
+                onClickHandler={selectPage}
+              />
             </div>
           ))}
       </div>

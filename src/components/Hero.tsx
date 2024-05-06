@@ -1,4 +1,4 @@
-import Button from "../components/Button";
+import LinkButton from "../components/LinkButton";
 
 const Hero = () => {
   return (
@@ -25,10 +25,10 @@ left-[23rem] rotate-12 translate-x-[22rem]
           </p>
         </div>
         <div className="flex flex-wrap max-w-[400px] justify-center ">
-          <Button path="/pages/extract">Extract Pages</Button>
-          <Button path="/pages/delete">Delete Pages</Button>
-          <Button path="/pdf/merge">Merge PDFs</Button>
-          <Button path="/pdf/resize">Resize PDF</Button>
+          <LinkButton path="/pages/extract">Extract Pages</LinkButton>
+          <LinkButton path="/pages/delete">Delete Pages</LinkButton>
+          <LinkButton path="/pdf/merge">Merge PDFs</LinkButton>
+          <LinkButton path="/pdf/resize">Resize PDF</LinkButton>
         </div>
       </div>
     </div>
