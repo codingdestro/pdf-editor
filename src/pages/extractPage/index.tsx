@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PdfViewer from "../../components/PdfViewer";
-import { createFileUrl } from "../../utils/createFileUrl";
 import UploadFile from "../../components/UploadFile";
 import Button from "../../components/Button";
 import { useLocation } from "react-router-dom";
@@ -15,12 +14,9 @@ const index = () => {
   const { upload, downloadHref } = useUploadFile();
 
   const { addPage, pages } = useAddPage();
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files!.length > 0 && e.target.files != null) {
-      setFile(e.target!.files[0]);
-    }
-    const link = createFileUrl(e.target.files);
-
+  const handleInput = (file: File) => {
+    setFile(file);
+    const link = URL.createObjectURL(file);
     link && setFileUrl(link);
   };
   return (

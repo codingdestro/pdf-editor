@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import UploadFile from "../../components/UploadFile";
 import Button from "../../components/Button";
 import { useMergeFile } from "../../utils/uploadFile";
@@ -16,13 +16,8 @@ const Home = () => {
 
   const { upload, downloadHref } = useMergeFile();
 
-  const handleUpload = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    key: "pdf1" | "pdf2",
-  ) => {
-    const file = e.target.files;
-    if (file != null && file?.length > 0)
-      setFiles((prev: FileType) => ({ ...prev, [key]: file[0] }));
+  const handleUpload = (file: File, key: "pdf1" | "pdf2") => {
+    setFiles((prev: FileType) => ({ ...prev, [key]: file }));
   };
 
   const UploadPDFsFile = () => {

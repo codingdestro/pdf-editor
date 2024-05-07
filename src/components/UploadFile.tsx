@@ -1,5 +1,7 @@
+import { useState } from "react";
+
 interface Props {
-  onChangeHandle: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeHandle: (e: File) => void;
   name?: string;
 }
 
@@ -17,6 +19,14 @@ const randomName = () => {
 };
 
 const UploadFile = ({ onChangeHandle, name }: Props) => {
+  const [selectedFile, setSelectedFile] = useState("");
+  const wrapperOnChangeHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files;
+    if (file != null && file.length > 0) {
+      setSelectedFile(file[0].name);
+      onChangeHandle(file[0]);
+    }
+  };
   const Id = randomName();
   return (
     <div className="flex items-center justify-center ">
@@ -26,14 +36,16 @@ const UploadFile = ({ onChangeHandle, name }: Props) => {
           htmlFor={Id}
         >
           <img src="/upload.png" className="w-[44px]" />
-          <p className="text-slate-400 font-normal">{name || "Upload File"}</p>
+          <p className="text-slate-400 font-normal">
+            {selectedFile || name || "Upload File"}
+          </p>
         </label>
       </div>
       <input
         className="hidden"
         id={Id}
         type="file"
-        onChange={(e) => onChangeHandle(e)}
+        onChange={wrapperOnChangeHandle}
       />
     </div>
   );
