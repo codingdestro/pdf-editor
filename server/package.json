@@ -1,0 +1,21 @@
+{
+  "name": ".",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "eslint-config-airbnb-typescript": "^18.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "body-parser": "^1.20.2",
+    "busboy": "^1.6.0",
+    "express": "^4.19.2",
+    "pdf-lib": "^1.17.1"
+  }
+}
