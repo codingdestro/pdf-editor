@@ -4,12 +4,20 @@ import { createFileUrl } from "../../utils/createFileUrl";
 import UploadFile from "../../components/UploadFile";
 import Button from "../../components/Button";
 import { useLocation } from "react-router-dom";
+import { useAddPage } from "../../hooks/useAddPage";
+import uploadFile from "../../utils/uploadFile";
 
 const index = () => {
   const [fileUrl, setFileUrl] = useState("");
+  const [file, setFile] = useState<File>();
   const location = useLocation();
+  const { addPage, pages } = useAddPage();
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files!.length > 0 && e.target.files != null) {
+      setFile(e.target!.files[0]);
+    }
     const link = createFileUrl(e.target.files);
+
     link && setFileUrl(link);
   };
   return (
@@ -20,7 +28,7 @@ const index = () => {
           disable={fileUrl == ""}
           onClickHandler={() =>
             location.pathname === "/pages/extract"
-              ? console.log("extract page")
+              ? uploadFile(file!, pages)
               : console.log("delete page")
           }
         >
@@ -32,7 +40,7 @@ const index = () => {
       <div>
         {fileUrl && (
           <div className="overflow-auto h-[800px] m-5 border rounded-lg shadow-lg ">
-            <PdfViewer url={fileUrl} />
+            <PdfViewer file={fileUrl} addPage={addPage} />
           </div>
         )}
       </div>
