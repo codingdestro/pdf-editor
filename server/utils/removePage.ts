@@ -10,3 +10,5 @@ const removePage = async (buff: Buff, pages = []) => {
   const bytes = await pdf.save();
   return bytes;
 };
+
+export default removePage;

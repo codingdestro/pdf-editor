@@ -1,4 +1,4 @@
-import { PDFDocument, PDFPage } from "pdf-lib";
+import { PDFDocument, PDFPage, defaultButtonAppearanceProvider } from "pdf-lib";
 import { type Buff } from "./types";
 
 const extractPage = async (buff: Buff, pages = []) => {
@@ -12,3 +12,5 @@ const extractPage = async (buff: Buff, pages = []) => {
   const bytes = await newPdf.save();
   return bytes;
 };
+
+export default extractPage;

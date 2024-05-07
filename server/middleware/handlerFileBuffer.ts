@@ -6,7 +6,7 @@ export const getFileBuffer = async (
   res: Response,
   next: NextFunction,
 ) => {
-  let files: { [key: string]: unknown[] };
+  let files: { [key: string]: unknown[] } = {};
   let pages: unknown = null;
 
   // console.log(req.headers);

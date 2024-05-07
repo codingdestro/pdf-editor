@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.19",
+    "axios": "^1.6.8",
     "pdfjs-dist": "^2.6.347",
     "postcss": "^8.4.38",
     "prefixer": "^0.0.3",
