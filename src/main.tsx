@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Hero from "./components/Hero.tsx";
 import ExtractPage from "./pages/extractPage";
 import ResizePage from "./pages/resizePdf";
+import MergePdf from "./pages/mergePdf";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -21,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Route>
         <Route path="/pdf" Component={Home}>
           <Route path="resize" Component={ResizePage} />
-          <Route path="merge" Component={Home} />
+          <Route path="merge" Component={MergePdf} />
         </Route>
         <Route path="*" element={<div>404 page not found</div>} />
       </Routes>

@@ -67,4 +67,28 @@ export const useUploadFile = () => {
   return { downloadHref, upload };
 };
 
+export const useMergeFile = () => {
+  const [downloadHref, setDownloadHref] = useState("");
+
+  const upload = async (url: string, file1: Blob, file2: Blob) => {
+    setDownloadHref("");
+    const form = new FormData();
+    form.append("pdf1", file1);
+    form.append("pdf2", file2);
+    try {
+      const e = await fetch(url, {
+        method: "POST",
+        body: form,
+      });
+      const res = await e.blob();
+      const href = URL.createObjectURL(res);
+      setDownloadHref(href);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return { downloadHref, upload };
+};
+
 export default uploadFile;
