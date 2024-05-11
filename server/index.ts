@@ -14,6 +14,12 @@ app.get("/", (_, res) => {
   res.json({ msg: "welcome to my pdf editro server" });
 });
 
-app.listen(5759, () => {
+const server = app.listen(5759, () => {
   console.log("welcome to pdfeditor server!");
+});
+
+process.on("SIGINT", () => {
+  console.log("stopping server ...");
+  server.close();
+  process.exit(0);
 });
