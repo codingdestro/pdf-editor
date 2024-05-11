@@ -2,7 +2,6 @@ import { Router, type Request, type Response } from "express";
 import { getFileBuffer } from "../middleware/handlerFileBuffer";
 import extractPage from "../utils/extractPage";
 import removePage from "../utils/removePage";
-import createChildProcess from "../utils/compress";
 import type { responseEncoding } from "axios";
 import { mergePdf } from "../utils/mergePdf";
 
@@ -49,7 +48,6 @@ route.post("/pdf/merge", getFileBuffer, async (req: Request, res: Response) => {
 });
 
 route.get("/pdf/compress", (_, res: Response) => {
-  createChildProcess();
   res.json({ msg: "done!" });
 });
 
